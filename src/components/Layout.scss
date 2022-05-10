@@ -13,8 +13,8 @@
   button {
     height: 40px;
     width: 100px;
-    border: solid transparent;
     cursor: pointer;
+    border: none;
     transition-property: all;
     transition-timing-function: linear;
     transition-duration: 0.3s;
@@ -29,6 +29,11 @@
   }
 }
 .maintable {
+  marquee{
+    color: white;
+    // max-height: 200px;
+    // width: 100%;
+  }
   height: auto;
   width: 100%;
   padding: 2%;
@@ -58,4 +63,76 @@
       text-align: left;
     }
   }
+}
+
+@media screen and (max-width:768px){
+  .selection {
+    height: auto;
+    margin-bottom: 30px;
+    width: 100%;
+    background-color: black;
+    border-style: solid;
+    border-color: transparent;
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+    button {
+      height: 40px;
+      width: 100px;
+      cursor: pointer;
+      border: none;
+      transition-property: all;
+      transition-timing-function: linear;
+      transition-duration: 0.3s;
+    }
+    .selected {
+      background-color: yellow;
+      color: black;
+    }
+    .non_selected {
+      background-color: black;
+      color: yellow;
+    }
+  }
+  .maintable {
+    marquee{
+      color: white;
+      font-size: 14px;
+      // max-height: 200px;
+      // width: 100%;
+    }
+    height: auto;
+    width: 100%;
+    padding: 2%;
+    background-color: #121212;
+    background-color: black;
+    table {
+      font-size: 14px;
+      thead {
+        background-color: #121212;
+      }
+      width: 100%;
+      height: auto;
+      text-align: left;
+      color: white;
+      border: solid 2px yellow;
+      border-collapse: collapse;
+      tr:nth-child(even) {
+        background-color: #121212;
+        cursor: pointer;
+      }
+      th {
+        padding: 15px;
+        text-align: left;
+        // border: solid 2px yellow;
+      }
+      td {
+        padding: 15px;
+        text-align: left;
+      }
+    }
+  }
+  
 }

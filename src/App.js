@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { CharactersProvider } from "./contexts/casts";
 
 function App() {
-  const { dataRecieved } = useApiCalls();
+  const { dataRecieved, loading, errorMsg } = useApiCalls();
   const [movieSelected, setMovieSelected] = useState("");
   console.log(movieSelected, "as selected movie");
 
@@ -14,6 +14,8 @@ function App() {
     <CharactersProvider>
       <section className="App">
         <Intro
+        errorMsg={errorMsg}
+        loading={loading}
           setMovieSelected={setMovieSelected}
           dataRecieved={dataRecieved}
         />

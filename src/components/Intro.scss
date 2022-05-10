@@ -1,3 +1,17 @@
+.loadingIntro{
+    height: 200px;
+    width: 350px;
+    margin: auto;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    img{
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
 .mainIntro{
     min-height: 100vh;
     width: 100%;
@@ -79,4 +93,20 @@
             }
         }
     }
+}
+
+
+
+@media screen and (max-width:768px){
+    .mainIntro{
+        img{
+            height: 60vh;
+            width: 100%;
+        }
+        
+        .dropDownContent{
+            min-width: 80%;
+        }
+    }
+    
 }

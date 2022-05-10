@@ -8,6 +8,7 @@ export const useCharacters = () => {
 export const CharactersProvider = ({ children }) => {
   const [characters_context, setCharacters] = useState([]);
   const [backupData, setBackupData] = useState([]);
+  const [loading, setLoading] = useState(true)
   console.log(characters_context, "as passed items");
 
   const getCharacters = async (links) => {
@@ -66,6 +67,10 @@ export const CharactersProvider = ({ children }) => {
     setBackupData([]);
     await getCharacters(item);
   };
+
+  const getOpeningCrawl = (selectedMovie) => {
+
+  }
 
   const sortByGender = async (incomingGender) => {
     console.log(incomingGender, "incoming");

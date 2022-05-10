@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-distracting-elements */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -12,13 +13,22 @@ const Layout = ({ dataRecieved, movieSelected }) => {
   const [direction, setDirection] = useState("descending");
   const [currentChild, setCurrentChild] = useState("all");
   const [totalHeight, setTotalHeight] = useState(0);
-  console.log(totalHeight, "dataRecieved...........");
+  const [crawler, setCrawler] = useState("");
+  // console.log(crawler, "dataRecieved...........");
 
   const getCharacters = () => {
     dataRecieved?.filter((item) => {
       if (item.title === movieSelected) {
         updateCharacters(item.characters);
         return;
+      }
+    });
+  };
+
+  const getCrawler = () => {
+    dataRecieved?.filter((item) => {
+      if (item.title === movieSelected) {
+        setCrawler(item.opening_crawl);
       }
     });
   };
@@ -57,15 +67,16 @@ const Layout = ({ dataRecieved, movieSelected }) => {
 
   useEffect(() => {
     getAllHeight();
-    
   }, [characters_context]);
 
   useEffect(() => {
     const unsub = getCharacters();
-    setCurrentChild("all")
+    const unsub2 = getCrawler();
+    setCurrentChild("all");
     // getAllHeight();
     return () => {
       unsub;
+      unsub2;
     };
   }, [movieSelected]);
 
@@ -74,6 +85,10 @@ const Layout = ({ dataRecieved, movieSelected }) => {
   return (
     <>
       <section className="maintable">
+        <marquee behavior="scroll" direction="left">
+         {crawler}
+        </marquee>
+
         {characters_context.length > 0 && (
           <div className="selection">
             <button

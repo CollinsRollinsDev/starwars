@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Intro.scss";
 import useApiCalls from "../Hooks/useApiCalls.jsx";
 
-const Intro = ({ dataRecieved, setMovieSelected }) => {
+const Intro = ({ dataRecieved, setMovieSelected, loading, errorMsg }) => {
+  console.log(errorMsg, "as error masg")
   const [showTitle, setShowTitle] = useState(false);
   const toggler = () => {
     showTitle ? setShowTitle(false) : setShowTitle(true);
@@ -52,9 +53,16 @@ const Intro = ({ dataRecieved, setMovieSelected }) => {
         </button>
       </div>
 
-      {showTitle && (
-        <section className="dropDownContent">{displayTitles}</section>
-      )}
+      {
+        errorMsg ? <div className="loadingIntro">
+        {errorMsg}
+      </div> 
+      :
+      loading ? <div className="loadingIntro">
+        <img src="/loading.gif" alt="" />
+      </div> : !loading && showTitle && <section className="dropDownContent">{displayTitles}</section>
+      }
+
     </section>
   );
 };
