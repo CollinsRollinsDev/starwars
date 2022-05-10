@@ -6,14 +6,16 @@ export const useCharacters = () => {
 };
 
 export const CharactersProvider = ({ children }) => {
+  const [inProgressCharacter, setInprogressCharacter] = useState([]);
   const [characters_context, setCharacters] = useState([]);
   const [backupData, setBackupData] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loadingData, setLoading] = useState(false)
   console.log(characters_context, "as passed items");
 
   const getCharacters = async (links) => {
-    links.forEach(async (link) => {
-      try {
+    setLoading(true)
+    try {
+        const keepWatch = await links.map(async (link) => {
         const res = await fetch(link);
         const data = await res.json();
         setCharacters((prevItems) => [
@@ -32,10 +34,15 @@ export const CharactersProvider = ({ children }) => {
             height: data.height,
           },
         ]);
-      } catch (error) {
-        console.log(error, "An error found and caught");
-      }
-    });
+      });
+      const awaited = await Promise.all(keepWatch)
+      setLoading(false)
+      console.log("done and dusted")
+    } catch (error) {
+      setLoading(false)
+      console.log(error, "An error found and caught");
+    }
+
   };
 
   // useEffect(() => {
@@ -89,7 +96,7 @@ export const CharactersProvider = ({ children }) => {
 
   return (
     <CharactersContext.Provider
-      value={{ characters_context, updateCharacters, sortPeople, sortByGender }}
+      value={{ characters_context, updateCharacters, sortPeople, sortByGender, loadingData }}
     >
       {children}
     </CharactersContext.Provider>

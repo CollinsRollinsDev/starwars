@@ -8,7 +8,7 @@ import TableData from "./TableData";
 import { useCharacters } from "../contexts/casts";
 
 const Layout = ({ dataRecieved, movieSelected }) => {
-  const { characters_context, updateCharacters, sortPeople, sortByGender } =
+  const { characters_context, updateCharacters, sortPeople, sortByGender, loadingData } =
     useCharacters();
   const [direction, setDirection] = useState("descending");
   const [currentChild, setCurrentChild] = useState("all");
@@ -80,7 +80,11 @@ const Layout = ({ dataRecieved, movieSelected }) => {
     };
   }, [movieSelected]);
 
-  // const getEachMovieData = dataRecieved?.map
+  if(loadingData){
+    return <div className='loadingDataIntro'>
+      <img src="/loading.gif" alt="" />
+    </div>
+  }
 
   return (
     <>

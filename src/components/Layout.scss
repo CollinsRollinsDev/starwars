@@ -1,3 +1,17 @@
+.loadingDataIntro{
+  height: 200px;
+  width: 350px;
+  margin: auto;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  img{
+      max-height: 100%;
+      max-width: 100%;
+  }
+}
 .selection {
   height: auto;
   margin-bottom: 30px;
