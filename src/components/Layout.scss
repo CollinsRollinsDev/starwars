@@ -104,11 +104,12 @@
       // width: 100%;
     }
     height: auto;
-    width: 100%;
+    max-width: 100%;
     padding: 2%;
     background-color: #121212;
     background-color: black;
     table {
+      max-width: 100% !important;
       font-size: 14px;
       thead {
         background-color: #121212;
@@ -122,6 +123,7 @@
       tr:nth-child(even) {
         background-color: #121212;
         cursor: pointer;
+        max-width: 100% !important;
       }
       th {
         padding: 15px;
