@@ -89,6 +89,7 @@ const Layout = ({ dataRecieved, movieSelected }) => {
   return (
     <>
       <section className="maintable">
+        {movieSelected && <h1>Movie: {movieSelected}</h1>}
         <marquee behavior="scroll" direction="left">
          {crawler}
         </marquee>
@@ -136,9 +137,9 @@ const Layout = ({ dataRecieved, movieSelected }) => {
                 <td></td>
                 <td>
                   Total Heights: {totalHeight}cm
-                  {`(${Math.round(totalHeight / 30.48)}ft/${Math.round(
+                 <p> {`(${Math.round(totalHeight / 30.48)}ft/${Math.round(
                     totalHeight / 2.54
-                  )}in)`}
+                  )}in)`}</p>
                 </td>
               </tr>
             </tbody>
