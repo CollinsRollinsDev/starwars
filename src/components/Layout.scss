@@ -1,0 +1,61 @@
+.selection {
+  height: auto;
+  margin-bottom: 30px;
+  width: 100%;
+  background-color: black;
+  border-style: solid;
+  border-color: transparent;
+  padding: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+  button {
+    height: 40px;
+    width: 100px;
+    border: solid transparent;
+    cursor: pointer;
+    transition-property: all;
+    transition-timing-function: linear;
+    transition-duration: 0.3s;
+  }
+  .selected {
+    background-color: yellow;
+    color: black;
+  }
+  .non_selected {
+    background-color: black;
+    color: yellow;
+  }
+}
+.maintable {
+  height: auto;
+  width: 100%;
+  padding: 2%;
+  background-color: #121212;
+  background-color: black;
+  table {
+    thead {
+      background-color: #121212;
+    }
+    width: 100%;
+    height: auto;
+    text-align: left;
+    color: white;
+    border: solid 2px yellow;
+    border-collapse: collapse;
+    tr:nth-child(even) {
+      background-color: #121212;
+      cursor: pointer;
+    }
+    th {
+      padding: 15px;
+      text-align: left;
+      // border: solid 2px yellow;
+    }
+    td {
+      padding: 15px;
+      text-align: left;
+    }
+  }
+}
