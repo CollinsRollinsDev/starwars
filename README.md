@@ -1,5 +1,5 @@
 # A STARWARS EXERCISE
-##STARWARS MOVIE CHARACTERS HIGHLIGHTS
+## STARWARS MOVIE CHARACTERS HIGHLIGHTS
 ![eCommerce](https://res.cloudinary.com/crdev/image/upload/v1652249215/github_repos/starwar1_tpczbd.png)
 
 ### Stack Used
