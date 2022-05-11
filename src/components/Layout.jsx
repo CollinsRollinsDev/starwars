@@ -8,14 +8,15 @@ import TableData from "./TableData";
 import { useCharacters } from "../contexts/casts";
 
 const Layout = ({ dataRecieved, movieSelected }) => {
+  // creating neccessary states
   const { characters_context, updateCharacters, sortPeople, sortByGender, loadingData } =
     useCharacters();
   const [direction, setDirection] = useState("descending");
   const [currentChild, setCurrentChild] = useState("all");
   const [totalHeight, setTotalHeight] = useState(0);
   const [crawler, setCrawler] = useState("");
-  // console.log(crawler, "dataRecieved...........");
 
+  // fn to get characters of a selected movie
   const getCharacters = () => {
     dataRecieved?.filter((item) => {
       if (item.title === movieSelected) {
@@ -25,6 +26,7 @@ const Layout = ({ dataRecieved, movieSelected }) => {
     });
   };
 
+    // fn to get opening crawler of a selected movie
   const getCrawler = () => {
     dataRecieved?.filter((item) => {
       if (item.title === movieSelected) {
@@ -33,14 +35,18 @@ const Layout = ({ dataRecieved, movieSelected }) => {
     });
   };
 
+    // fn to get all height of all characters of a selected movie
   const getAllHeight = async () => {
     const newCharacter = characters_context.filter(
+      // prevent code breaking due to some height showing up as unknown
       (item) => item.height !== "unknown"
     );
     const allSum = newCharacter.reduce((a, b) => +a + +b.height, 0);
     setTotalHeight((prevState) => (prevState = allSum));
   };
 
+  // sorting the characters after clicking the table headers
+  // fn is called from context api
   const sortingCasts = () => {
     if (direction === "assending") {
       sortPeople("descending");
@@ -51,6 +57,7 @@ const Layout = ({ dataRecieved, movieSelected }) => {
     setDirection("assending");
   };
 
+  // pairing child for selected button styling
   useEffect(() => {
     currentChild === "Male Only"
       ? sortByGender("male")
@@ -59,9 +66,10 @@ const Layout = ({ dataRecieved, movieSelected }) => {
       : sortByGender("all");
   }, [currentChild]);
 
-  const displayCharacters = characters_context.map((item) => {
+  // mapping out all table items into the table data component
+  const displayCharacters = characters_context.map((item, index) => {
     return (
-      <TableData name={item.name} height={item.height} gender={item.gender} />
+      <TableData key={index} name={item.name} height={item.height} gender={item.gender} />
     );
   });
 
@@ -80,12 +88,14 @@ const Layout = ({ dataRecieved, movieSelected }) => {
     };
   }, [movieSelected]);
 
+  // if page is still loading on api request, show loading on screen
   if(loadingData){
     return <div className='loadingDataIntro'>
       <img src="/loading.gif" alt="" />
     </div>
   }
 
+  // else, no loading will show the main items
   return (
     <>
       <section className="maintable">

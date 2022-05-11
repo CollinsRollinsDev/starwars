@@ -10,8 +10,8 @@ export const CharactersProvider = ({ children }) => {
   const [characters_context, setCharacters] = useState([]);
   const [backupData, setBackupData] = useState([]);
   const [loadingData, setLoading] = useState(false)
-  console.log(characters_context, "as passed items");
 
+  // function to get character and push to an array of existing characters
   const getCharacters = async (links) => {
     setLoading(true)
     try {
@@ -26,6 +26,7 @@ export const CharactersProvider = ({ children }) => {
             height: data.height,
           },
         ]);
+        // creating a backup data to avoid loss of data when sorting
         setBackupData((prevItems) => [
           ...prevItems,
           {
@@ -35,12 +36,13 @@ export const CharactersProvider = ({ children }) => {
           },
         ]);
       });
+      // making sure no code runs until the map function is completed
       const awaited = await Promise.all(keepWatch)
       setLoading(false)
-      console.log("done and dusted")
+      return
     } catch (error) {
       setLoading(false)
-      console.log(error, "An error found and caught");
+      return
     }
 
   };
@@ -49,6 +51,7 @@ export const CharactersProvider = ({ children }) => {
 
   // }, []);
 
+  // function to sort people/characters 
   const sortPeople = async (direction) => {
     if (direction === "assending") {
       let cahcedCharecters = characters_context;
@@ -60,11 +63,13 @@ export const CharactersProvider = ({ children }) => {
       setCharacters(newCharacters);
     } else {
       let cahcedCharecters = characters_context;
+      // clearing initial/existing data to avoid messing up the data at times
       setCharacters([]);
       let newCharacters;
       newCharacters = await cahcedCharecters
         .sort((a, b) => (a.name > b.name ? 1 : -1))
         .reverse();
+        // setting up new and updated data
       setCharacters(newCharacters);
     }
   };
@@ -75,12 +80,8 @@ export const CharactersProvider = ({ children }) => {
     await getCharacters(item);
   };
 
-  const getOpeningCrawl = (selectedMovie) => {
-
-  }
 
   const sortByGender = async (incomingGender) => {
-    console.log(incomingGender, "incoming");
     if (incomingGender === "all" && backupData.length > 0) {
       await setCharacters([]);
       setCharacters(backupData);
@@ -94,6 +95,7 @@ export const CharactersProvider = ({ children }) => {
     setCharacters(newCharacters);
   };
 
+  // returning neccessary values to children components
   return (
     <CharactersContext.Provider
       value={{ characters_context, updateCharacters, sortPeople, sortByGender, loadingData }}

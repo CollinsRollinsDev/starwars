@@ -6,9 +6,10 @@ import { useState, useEffect } from "react";
 import { CharactersProvider } from "./contexts/casts";
 
 function App() {
+  // setting up neccessary states
+  // calling the custom hook to load up dropdown contents
   const { dataRecieved, loading, errorMsg } = useApiCalls();
   const [movieSelected, setMovieSelected] = useState("");
-  console.log(movieSelected, "as selected movie");
 
   return (
     <CharactersProvider>

@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useLayoutEffect } from "react";
 
+// hook to call film api for dropdown movie title names on page load
 const useApiCalls = (url = "https://swapi.dev/api/films") => {
   const [dataRecieved, setDataRecieved] = useState([]);
   const [loading, setLoading] = useState(true)
@@ -9,9 +11,7 @@ const useApiCalls = (url = "https://swapi.dev/api/films") => {
     try {
       const res = await fetch(url);
       const data = await res.json();
-      // console.log(data.results, "As to sor data");
       if (!data?.results) {
-        // do nothing for now
         setLoading(false)
         setErrorMsg('')
         return "done";
@@ -23,15 +23,11 @@ const useApiCalls = (url = "https://swapi.dev/api/films") => {
     } catch (error) {
       setLoading(false)
       setErrorMsg("Sorry, Unable to get data at this time.")
-      console.log(error, "As srror found and caught");
     }
   };
 
   useLayoutEffect(() => {
-    getMovies();
-    //   return () => {
-    //     second
-    //   };
+     getMovies();
   }, []);
 
   return { dataRecieved, loading, errorMsg };
