@@ -4,6 +4,7 @@
 
 ### Stack Used
 * ReactJs
+* SASS for styling
 
 ### Short Description
 Star Wars is an American epic space opera media franchise created by 
